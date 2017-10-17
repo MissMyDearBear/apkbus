@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/dp_10"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/font_14sp_grayA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:text="@string/date" />
+
+        <TextView
+            android:id="@+id/date"
+            style="@style/font_14sp_grayB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="2017-10-17" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/font_14sp_grayA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:text="@string/dayTime" />
+
+        <TextView
+            android:id="@+id/dayTime"
+            style="@style/font_14sp_grayB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="雨" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/font_14sp_grayA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:text="@string/night" />
+
+        <TextView
+            android:id="@+id/night"
+            style="@style/font_14sp_grayB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="多云" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/font_14sp_grayA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:text="@string/temperature" />
+
+        <TextView
+            android:id="@+id/temperature_section"
+            style="@style/font_14sp_grayB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="20°C / 14°C" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/font_14sp_grayA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:text="@string/week" />
+
+        <TextView
+            android:id="@+id/week"
+            style="@style/font_14sp_grayB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="星期二" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/font_14sp_grayA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:text="@string/wind" />
+
+        <TextView
+            android:id="@+id/wind"
+            style="@style/font_14sp_grayB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="东北风 3级" />
+    </LinearLayout>
+</LinearLayout>

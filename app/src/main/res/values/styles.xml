@@ -17,4 +17,113 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <!-- FONT STYLE -->
+    <style name="temperature_38sp_blueF">
+        <item name="android:textSize">38sp</item>
+        <item name="android:textColor">@color/blueF</item>
+    </style>
+    <style name="temperature_28sp_blueF">
+        <item name="android:textSize">28sp</item>
+        <item name="android:textColor">@color/blueF</item>
+    </style>
+    <style name="temperature_33sp_blueF">
+        <item name="android:textSize">33sp</item>
+        <item name="android:textColor">@color/blueF</item>
+    </style>
+    <style name="temperature_43sp_blueF">
+        <item name="android:textSize">43sp</item>
+        <item name="android:textColor">@color/blueF</item>
+    </style>
+    <style name="font_23sp_blueF">
+        <item name="android:textSize">23sp</item>
+        <item name="android:textColor">@color/blueF</item>
+    </style>
+    <style name="font_20sp_blueF">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/blueF</item>
+    </style>
+    <style name="font_16sp_blueF">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/blueF</item>
+    </style>
+    <style name="font_15sp_redA">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/redA</item>
+    </style>
+    <style name="font_16sp_redA">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/redA</item>
+    </style>
+    <style name="font_12sp_grayA">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/grayA</item>
+    </style>
+    <style name="font_13sp_grayA">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/grayA</item>
+    </style>
+    <style name="font_14sp_grayA">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/grayA</item>
+    </style>
+    <style name="font_15sp_grayA">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/grayA</item>
+    </style>
+    <style name="font_16sp_grayA">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/redA</item>
+    </style>
+    <style name="font_18sp_grayA">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/grayA</item>
+    </style>
+    <style name="font_12sp_grayB">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/grayB</item>
+    </style>
+    <style name="font_13sp_grayB">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/grayB</item>
+    </style>
+    <style name="font_14sp_grayB">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/grayB</item>
+    </style>
+    <style name="font_15sp_grayB">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/grayB</item>
+    </style>
+    <style name="font_16sp_grayB">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/grayB</item>
+    </style>
+    <style name="font_18sp_grayB">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/grayB</item>
+    </style>
+    <style name="font_12sp_grayC">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/grayC</item>
+    </style>
+    <style name="font_13sp_grayC">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/grayC</item>
+    </style>
+    <style name="font_14sp_grayC">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/grayC</item>
+    </style>
+    <style name="font_15sp_grayC">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/grayC</item>
+    </style>
+    <style name="font_16sp_grayC">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/grayC</item>
+    </style>
+    <style name="font_18sp_grayC">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/grayC</item>
+    </style>
 </resources>
