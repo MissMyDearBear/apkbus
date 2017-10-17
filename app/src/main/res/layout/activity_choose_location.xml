@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/root"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:alpha="0.3"
+        android:background="@color/blueE"
+        android:orientation="vertical" />
+
+    <TextView
+        style="@style/font_23sp_blueF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="@dimen/dp_10"
+        android:text="@string/please_choose_area" />
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@color/grayE"
+        android:orientation="horizontal">
+
+        <com.apkbus.weather.wheel_widget.WheelView
+            android:id="@+id/provinceWheelView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <com.apkbus.weather.wheel_widget.WheelView
+            android:id="@+id/cityWheelView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <com.apkbus.weather.wheel_widget.WheelView
+            android:id="@+id/districtWheelView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/confirmButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dp_10"
+        android:alpha="0.5"
+        android:padding="@dimen/dp_10"
+        android:text="@string/sure"
+        android:textColor="#000000"
+        android:textSize="@dimen/sp_16" />
+
+</LinearLayout>
