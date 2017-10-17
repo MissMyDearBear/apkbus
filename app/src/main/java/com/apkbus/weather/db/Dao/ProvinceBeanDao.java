@@ -1,7 +1,10 @@
-package com.apkbus.weather.db;
+package com.apkbus.weather.db.Dao;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteStatement;
+
+import com.apkbus.weather.db.Bean.ProvinceBean;
+import com.apkbus.weather.db.DaoSession;
 
 import org.greenrobot.greendao.AbstractDao;
 import org.greenrobot.greendao.Property;
@@ -117,12 +120,11 @@ public class ProvinceBeanDao extends AbstractDao<ProvinceBean, Long> {
 
     @Override
     public boolean hasKey(ProvinceBean entity) {
-        throw new UnsupportedOperationException("Unsupported for entities with a non-null key");
+      return false;
     }
 
     @Override
     protected final boolean isEntityUpdateable() {
         return true;
     }
-    
 }

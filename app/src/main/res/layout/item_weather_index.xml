@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="@dimen/dp_10">
+
+    <TextView
+        android:id="@+id/item_key"
+        style="@style/font_14sp_grayA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        tools:text="穿衣指数" />
+
+    <TextView
+        android:id="@+id/item_value"
+        style="@style/font_23sp_blueF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="不建议" />
+</LinearLayout>

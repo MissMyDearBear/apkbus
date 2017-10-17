@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="15dp"
+        tools:background="#eee">
+
+        <TextView
+            android:id="@+id/address"
+            android:drawablePadding="@dimen/dp_4"
+            android:drawableLeft="@drawable/local"
+            style="@style/font_20sp_blueF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="苏州" />
+
+        <TextView
+            android:id="@+id/big_temperature"
+            style="@style/temperature_38sp_blueF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            tools:text="21°C " />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/weather"
+                style="@style/font_15sp_redA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="晴" />
+
+            <TextView
+                android:id="@+id/airCondition"
+                style="@style/font_15sp_redA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginStart="30dp"
+                tools:text="天气优" />
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/grid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@color/grayE" />
+
+        <TextView
+            style="@style/font_16sp_redA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="@string/future_ten_days_weather_prediction" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@color/grayE" />
+    </LinearLayout>
+</ScrollView>

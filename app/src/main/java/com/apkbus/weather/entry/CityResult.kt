@@ -1,13 +1,11 @@
-package com.apkbus.weather.entry;
-
-import java.util.List;
+package com.apkbus.weather.entry
 
 /**
  * description:
  * author: bear .
  * Created date:  2017/10/10.
  */
-public class CityResult {
+class CityResult {
 
     /**
      * msg : success
@@ -15,20 +13,20 @@ public class CityResult {
      * retCode : 200
      */
 
-    public String msg;
-    public String retCode;
-    public List<ResultBean> result;
+    var msg: String? = null
+    var retCode: String? = null
+    var result: List<ResultBean>? = null
 
-    public static class ResultBean {
-        public String province;
-        public List<CityBean> city;
+    class ResultBean {
+        var province: String? = null
+        var city: List<CityBean>? = null
 
-        public static class CityBean {
-            public String city;
-            public List<DistrictBean> district;
+        class CityBean {
+            var city: String? = null
+            var district: List<DistrictBean>? = null
 
-            public static class DistrictBean {
-                public String district;
+            class DistrictBean {
+                var district: String? = null
             }
         }
     }
