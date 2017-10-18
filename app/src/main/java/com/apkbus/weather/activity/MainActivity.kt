@@ -1,22 +1,23 @@
-package com.apkbus.weather
+package com.apkbus.weather.activity
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import com.apkbus.weather.R
+import com.apkbus.weather.base.BaseActivity
+import com.apkbus.weather.fragment.CityWeatherFragment
 import com.apkbus.weather.utils.CityUtils
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
     var city:String? = ""
     var province: String? = ""
 
     companion object {
-        fun action(activity: AppCompatActivity, city: String, province: String) {
+        fun action(activity: BaseActivity?, city: String, province: String) {
             val intent = Intent(activity, MainActivity::class.java)
             intent.putExtra("city", city)
             intent.putExtra("province", province)
-            activity.startActivity(intent)
+            activity?.startActivity(intent)
         }
     }
 

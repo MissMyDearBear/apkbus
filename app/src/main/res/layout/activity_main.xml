@@ -7,7 +7,7 @@
     android:id="@+id/root"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.apkbus.weather.MainActivity">
+    tools:context="com.apkbus.weather.activity.MainActivity">
     <LinearLayout
         android:id="@+id/container"
         android:layout_width="match_parent"

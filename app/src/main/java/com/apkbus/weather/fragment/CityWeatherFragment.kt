@@ -1,4 +1,4 @@
-package com.apkbus.weather
+package com.apkbus.weather.fragment
 
 import android.content.Intent
 import android.os.Bundle
@@ -15,6 +15,8 @@ import com.apkbus.weather.api.ApiCallBack
 import com.apkbus.weather.api.ApiHelper
 import com.apkbus.weather.DataBean.IndexBean
 import com.apkbus.weather.DataBean.WeatherBean
+import com.apkbus.weather.R
+import com.apkbus.weather.activity.ChooseLocationActivity
 import com.apkbus.weather.utils.GsonUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder

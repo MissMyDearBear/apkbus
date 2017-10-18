@@ -1,8 +1,10 @@
-package com.apkbus.weather
+package com.apkbus.weather.activity
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.KeyEvent
+import com.apkbus.weather.R
+import com.apkbus.weather.base.BaseActivity
 import com.apkbus.weather.base.MyApplication
 import com.apkbus.weather.db.Bean.CityBean
 import com.apkbus.weather.db.Bean.DistrictBean
@@ -14,7 +16,7 @@ import com.apkbus.weather.wheel_widget.WheelView
 import com.apkbus.weather.wheel_widget.adapters.ArrayWheelAdapter
 import kotlinx.android.synthetic.main.activity_choose_location.*
 
-class ChooseLocationActivity : AppCompatActivity(), OnWheelChangedListener {
+class ChooseLocationActivity : BaseActivity(), OnWheelChangedListener {
     var daoSession: DaoSession? = null
 
     // 省列表
@@ -40,7 +42,7 @@ class ChooseLocationActivity : AppCompatActivity(), OnWheelChangedListener {
         setOnWheelChangeListener()
 
         confirmButton.setOnClickListener({
-            MainActivity.action(this, mCurrentCityName, mCurrentProviceName)
+            MainActivity.action(mActivity, mCurrentCityName, mCurrentProviceName)
         })
     }
 
