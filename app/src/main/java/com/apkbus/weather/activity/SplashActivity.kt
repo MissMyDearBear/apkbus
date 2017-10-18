@@ -31,7 +31,6 @@ class SplashActivity : BaseActivity(), SurfaceHolder.Callback {
         }
     }
 
-    private val PATH = "file:///android_asset/loading.mp4"
     private var media: MediaPlayer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
