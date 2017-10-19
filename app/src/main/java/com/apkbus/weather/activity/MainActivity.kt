@@ -27,7 +27,7 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         CityUtils.getAllCities(this)
-        root.setBackgroundResource(R.drawable.ic_background1)
+        root.setBackgroundResource(R.drawable.bg_main)
 
         if (intent != null) {
             city = intent.getStringExtra("city")
