@@ -18,8 +18,6 @@ package com.apkbus.weather.wheel_widget;
 
 /**
  * Wheel adapter interface
- * 
- * @deprecated Use WheelViewAdapter
  */
 public interface WheelAdapter {
 	/**
