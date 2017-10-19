@@ -81,13 +81,4 @@ object GsonUtils {
         }
         return jsonStr
     }
-
-    // TextView非空赋值，空划线
-    fun toText(text: TextView, str: String?) {
-        if (TextUtils.isEmpty(str)){
-            text.text = "----"
-        } else {
-            text.text = str
-        }
-    }
 }

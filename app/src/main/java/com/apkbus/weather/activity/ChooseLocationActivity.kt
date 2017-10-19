@@ -1,5 +1,7 @@
 package com.apkbus.weather.activity
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.KeyEvent
@@ -42,7 +44,12 @@ class ChooseLocationActivity : BaseActivity(), OnWheelChangedListener {
         setOnWheelChangeListener()
 
         confirmButton.setOnClickListener({
-            MainActivity.action(mActivity, mCurrentCityName, mCurrentProviceName)
+
+            var intent:Intent=Intent();
+            intent.putExtra("cityName",mCurrentCityName)
+            intent.putExtra("provinceName",mCurrentProviceName)
+            setResult(Activity.RESULT_OK,intent)
+            finish()
         })
     }
 

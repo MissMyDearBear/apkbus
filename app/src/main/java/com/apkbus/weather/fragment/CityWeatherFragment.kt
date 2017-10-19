@@ -1,5 +1,6 @@
 package com.apkbus.weather.fragment
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -9,32 +10,31 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.TextView
-import com.apkbus.weather.api.ApiCallBack
-import com.apkbus.weather.api.ApiHelper
 import com.apkbus.weather.DataBean.IndexBean
 import com.apkbus.weather.DataBean.WeatherBean
 import com.apkbus.weather.R
 import com.apkbus.weather.activity.ChooseLocationActivity
+import com.apkbus.weather.api.ApiCallBack
+import com.apkbus.weather.api.ApiHelper
 import com.apkbus.weather.utils.GsonUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import kotlinx.android.synthetic.main.fragment_city_weather.*
 
 class CityWeatherFragment : Fragment() {
-    var province:String? = ""
-    var city:String? = ""
-    var mActivity = this.activity
+    private val REQUSET_SELECT_CITY = 1101
+    private var province: String? = ""
+    private var city: String? = ""
+    private var mActivity = this.activity
 
-    var linearLayout: LinearLayout? = null
-    val TAG_API = "ApiCallBack:"
-    var rootView: View? = null
-    var indexDatas = ArrayList<IndexBean>()
+    private val TAG_API = "ApiCallBack:"
+    private var rootView: View? = null
+    private var indexDatas = ArrayList<IndexBean>()
     private val myApiHelper = ApiHelper
-    val method = "/weather/query"
-    val params = HashMap<String, String>()
-    var weatherBean: WeatherBean? = null
+    private val method = "/weather/query"
+    private val params = HashMap<String, String>()
+    private var weatherBean: WeatherBean? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,8 +51,7 @@ class CityWeatherFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         address.setOnClickListener({
             val intent = Intent(this.activity, ChooseLocationActivity::class.java)
-            this.activity.startActivity(intent)
-            this.activity.finish()
+            this.activity.startActivityForResult(intent, REQUSET_SELECT_CITY)
         })
         if (TextUtils.isEmpty(province) && TextUtils.isEmpty(city)) {
             initView("北京", "北京")
@@ -70,10 +69,10 @@ class CityWeatherFragment : Fragment() {
                 if (!TextUtils.isEmpty(result)) {
                     weatherBean = GsonUtils.jsonToClass(result, WeatherBean::class.java)
 
-                    GsonUtils.toText(address, province + "——" + city)
-                    GsonUtils.toText(big_temperature, weatherBean?.result?.get(0)?.temperature)
-                    GsonUtils.toText(weather, "天气情况：" + weatherBean?.result?.get(0)?.weather)
-                    GsonUtils.toText(airCondition, "空气质量：" + weatherBean?.result?.get(0)?.airCondition)
+                    toText(address, province + "——" + city)
+                    toText(big_temperature, weatherBean?.result?.get(0)?.temperature)
+                    toText(weather, "天气情况：" + weatherBean?.result?.get(0)?.weather)
+                    toText(airCondition, "空气质量：" + weatherBean?.result?.get(0)?.airCondition)
 
                     indexDatas.add(0, IndexBean("风向风力", weatherBean?.result?.get(0)?.wind))
                     indexDatas.add(1, IndexBean("日出时间", weatherBean?.result?.get(0)?.sunrise))
@@ -100,20 +99,42 @@ class CityWeatherFragment : Fragment() {
     class MyGridViewAdapter(layoutRes: Int, datas: List<IndexBean>?) :
             BaseQuickAdapter<IndexBean, BaseViewHolder>(layoutRes, datas) {
         override fun convert(viewHolder: BaseViewHolder?, item: IndexBean) {
-            GsonUtils.toText(viewHolder!!.getView<TextView>(R.id.item_key), item.indexName)
-            GsonUtils.toText(viewHolder.getView<TextView>(R.id.item_value), item.indexContent)
+            toText(viewHolder!!.getView<TextView>(R.id.item_key), item.indexName)
+            toText(viewHolder.getView<TextView>(R.id.item_value), item.indexContent)
         }
     }
 
     class MyRecyclerViewAdapter(layoutRes: Int, datas: List<WeatherBean.ResultBean.FutureBean>?) :
             BaseQuickAdapter<WeatherBean.ResultBean.FutureBean, BaseViewHolder>(layoutRes, datas) {
         override fun convert(viewHolder: BaseViewHolder?, item: WeatherBean.ResultBean.FutureBean) {
-            GsonUtils.toText(viewHolder!!.getView<TextView>(R.id.date), item.date)
-            GsonUtils.toText(viewHolder.getView<TextView>(R.id.dayTime), item.dayTime)
-            GsonUtils.toText(viewHolder.getView<TextView>(R.id.night), item.night)
-            GsonUtils.toText(viewHolder.getView<TextView>(R.id.temperature_section), item.temperature)
-            GsonUtils.toText(viewHolder.getView<TextView>(R.id.wind), item.wind)
-            GsonUtils.toText(viewHolder.getView<TextView>(R.id.week), item.week)
+            toText(viewHolder!!.getView<TextView>(R.id.date), item.date)
+            toText(viewHolder.getView<TextView>(R.id.dayTime), item.dayTime)
+            toText(viewHolder.getView<TextView>(R.id.night), item.night)
+            toText(viewHolder.getView<TextView>(R.id.temperature_section), item.temperature)
+            toText(viewHolder.getView<TextView>(R.id.wind), item.wind)
+            toText(viewHolder.getView<TextView>(R.id.week), item.week)
         }
     }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUSET_SELECT_CITY && resultCode == Activity.RESULT_OK && data != null) {
+            val currCityName = data.getStringExtra("cityName")
+            val currProvinceName = data.getStringExtra("provinceName")
+            initView(currProvinceName, currCityName)
+        }
+    }
+
+    companion object {
+        // TextView非空赋值，空划线
+        fun toText(text: TextView, str: String?) {
+            if (TextUtils.isEmpty(str)) {
+                text.text = "----"
+            } else {
+                text.text = str
+            }
+        }
+    }
+
 }
