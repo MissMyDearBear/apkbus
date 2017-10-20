@@ -11,7 +11,6 @@ import com.apkbus.weather.api.ApiCallBack
 import com.apkbus.weather.api.ApiHelper
 import com.apkbus.weather.sharedPreference.WeatherSpKey
 import com.apkbus.weather.utils.getWeatherDataSp
-import com.apkbus.weather.utils.outLog
 
 /**
  * description:
@@ -46,7 +45,7 @@ class UpdateService : IntentService("updateWeather") {
         var pi = PendingIntent.getService(this, 0, intent, 0)
         manager.cancel(pi)
         manager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerAtTime, pi)
-        outLog("调用时间：" + System.currentTimeMillis().toString())
+        println("调用时间：" + System.currentTimeMillis().toString())
         return super.onStartCommand(intent, flags, startId)
     }
 
