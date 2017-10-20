@@ -1,4 +1,4 @@
-package com.apkbus.weather.DataBean
+package com.apkbus.weather.entry
 
 class WeatherBean {
     /**

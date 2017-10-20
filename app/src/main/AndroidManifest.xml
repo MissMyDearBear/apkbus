@@ -40,6 +40,7 @@
             android:label="选择地区"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <service android:name=".service.UpdateService"/>
     </application>
 
 </manifest>

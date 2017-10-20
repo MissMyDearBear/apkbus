@@ -5,6 +5,7 @@ import android.os.Bundle
 import com.apkbus.weather.R
 import com.apkbus.weather.base.BaseActivity
 import com.apkbus.weather.fragment.CityWeatherFragment
+import com.apkbus.weather.service.UpdateService
 import com.apkbus.weather.utils.CityUtils
 import com.apkbus.weather.utils.showToast
 import kotlinx.android.synthetic.main.activity_main.*
@@ -40,6 +41,7 @@ class MainActivity : BaseActivity() {
         bundle.putString("province", province)
         fragment!!.arguments = bundle
         supportFragmentManager.beginTransaction().add(R.id.container, fragment).commit()
+        UpdateService.startUpdateService(mActivity)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

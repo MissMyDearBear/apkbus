@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity
  * Created date:  2017/10/18.
  */
 abstract class BaseActivity:AppCompatActivity(){
-     var mActivity:BaseActivity?=null
+     lateinit var mActivity:BaseActivity
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mActivity=this

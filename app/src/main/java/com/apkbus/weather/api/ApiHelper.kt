@@ -8,7 +8,6 @@ import java.io.InputStream
 import java.net.HttpURLConnection
 import java.net.URL
 import java.net.URLEncoder
-import java.util.*
 import javax.net.ssl.HttpsURLConnection
 
 /**
@@ -21,7 +20,7 @@ class ApiHelper {
         var KEY = "520520test"
         val BASE_URL = "http://apicloud.mob.com/v1"
 
-        fun get(mActivity: Activity, method: String, params: HashMap<String, String>, callBack: ApiCallBack?) {
+        fun get(mActivity: Activity?, method: String, params: HashMap<String, String>, callBack: ApiCallBack?) {
             Thread(Runnable {
                 try {
                     val tempParams = StringBuilder()
@@ -56,14 +55,18 @@ class ApiHelper {
                     if (urlConn.responseCode == HttpsURLConnection.HTTP_OK) {
                         //获取返回数据
                         val result = streamToString(urlConn.inputStream)
-                        if (!TextUtils.isEmpty(result) && !mActivity.isFinishing) {
+                        if (mActivity == null) {
+                            callBack?.onSuccess(result)
+                        } else if (!TextUtils.isEmpty(result) && !mActivity.isFinishing) {
                             mActivity.runOnUiThread {
                                 if (callBack != null && !TextUtils.isEmpty(result))
                                     callBack.onSuccess(result)
                             }
                         }
                     } else {
-                        if (!mActivity.isFinishing) {
+                        if (mActivity == null) {
+                            callBack?.onError("返回码：" + urlConn.responseCode)
+                        } else if (!mActivity.isFinishing) {
                             mActivity.runOnUiThread {
                                 callBack?.onError("返回码：" + urlConn.responseCode)
                             }
@@ -159,6 +162,18 @@ class ApiHelper {
             } catch (e: Exception) {
                 "Exception"
             }
+        }
+
+
+        /**
+         * 获取天气详情
+         */
+        fun getWeatherDetail(activity: Activity?, province: String?, city: String?, callBack: ApiCallBack?) {
+            var params = HashMap<String, String>()
+            params.put("key", "520520test")
+            params.put("province", province!!)
+            params.put("city", city!!)
+            get(activity, "/weather/query", params, callBack)
         }
     }
 }

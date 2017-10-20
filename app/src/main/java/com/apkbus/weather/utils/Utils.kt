@@ -11,3 +11,8 @@ import com.apkbus.weather.base.BaseActivity
 fun showToast(context: BaseActivity?, msg:String){
     Toast.makeText(context,msg,Toast.LENGTH_SHORT).show()
 }
+
+
+fun outLog(msg:String){
+    System.out.println(msg)
+}
