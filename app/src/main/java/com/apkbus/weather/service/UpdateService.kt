@@ -21,8 +21,8 @@ class UpdateService : IntentService("updateWeather") {
 
     override fun onHandleIntent(p0: Intent?) {
         val sp = getWeatherDataSp()
-        var pName: String = sp.getString("provinceName", "北京")
-        var cName: String = sp.getString("cityName", "北京")
+        var pName: String = sp.getString(WeatherSpKey.provinceName, "北京")
+        var cName: String = sp.getString(WeatherSpKey.cityName, "北京")
 
         ApiHelper.getWeatherDetail(null, pName, cName, object : ApiCallBack {
             override fun onSuccess(result: String) {
