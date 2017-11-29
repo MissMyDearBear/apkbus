@@ -10,11 +10,6 @@ import java.net.URL
 import java.net.URLEncoder
 import javax.net.ssl.HttpsURLConnection
 
-/**
- * description:
- * author: bear .
- * Created date:  2017/10/10.
- */
 class ApiHelper {
     companion object {
         var KEY = "520520test"
@@ -168,11 +163,11 @@ class ApiHelper {
         /**
          * 获取天气详情
          */
-        fun getWeatherDetail(activity: Activity?, province: String?, city: String?, callBack: ApiCallBack?) {
-            var params = HashMap<String, String>()
+        fun getWeatherDetail(activity: Activity?, province: String?, city: String?, town: String?, callBack: ApiCallBack?) {
+            val params = HashMap<String, String>()
             params.put("key", "520520test")
             params.put("province", province!!)
-            params.put("city", city!!)
+            params.put("city", town!!)
             get(activity, "/weather/query", params, callBack)
         }
     }

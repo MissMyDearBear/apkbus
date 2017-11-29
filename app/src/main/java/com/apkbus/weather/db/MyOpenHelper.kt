@@ -5,11 +5,6 @@ import android.database.sqlite.SQLiteDatabase
 
 import org.greenrobot.greendao.database.Database
 
-/**
- * description: GreenDao帮助类
- * author: bear .
- * Created date:  2017/5/17.
- */
 class MyOpenHelper : DaoMaster.DevOpenHelper {
     constructor(context: Context, name: String) : super(context, name)
 

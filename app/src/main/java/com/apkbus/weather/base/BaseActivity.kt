@@ -1,18 +1,12 @@
 package com.apkbus.weather.base
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import com.apkbus.weather.library.app.SwipeBackActivity
 
-/**
- * description:
- * author: bear .
- * Created date:  2017/10/18.
- */
-abstract class BaseActivity:AppCompatActivity(){
-     lateinit var mActivity:BaseActivity
+abstract class BaseActivity : SwipeBackActivity() {
+    lateinit var mActivity: BaseActivity
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mActivity=this
+        mActivity = this
     }
-
 }

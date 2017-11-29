@@ -1,28 +1,27 @@
 package com.apkbus.weather.sharedPreference
 
-/**
- * description:
- * author: bear .
- * Created date:  2017/10/20.
- */
-class WeatherSpKey{
+class WeatherSpKey {
     companion object {
         /**
          * 获取天气后的json字符串
          * 【value String】
          */
-         var data:String?=null
+        var data: String? = null
 
         /**
          * 当前选择的省份
          * 【value String】
          */
-        var  provinceName="provinceName"
+        var provinceName = "province"
         /**
          * 当前选择的城市
          * 【value String】
          */
-        var  cityName="cityName"
+        var cityName = "city"
+        /**
+         * 当前选择的城市
+         * 【value String】
+         */
+        var townName = "town"
     }
-
 }

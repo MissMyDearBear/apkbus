@@ -1,17 +1,11 @@
 package com.apkbus.weather.db.Bean
 
+import com.apkbus.weather.utils.CityUtils.LEVEL_CITY
 import org.greenrobot.greendao.annotation.Entity
 import org.greenrobot.greendao.annotation.Generated
 import org.greenrobot.greendao.annotation.Id
 import org.greenrobot.greendao.annotation.Index
 
-import com.apkbus.weather.utils.CityUtils.LEVEL_CITY
-
-/**
- * description:
- * author: bear .
- * Created date:  2017/10/10.
- */
 @Entity(indexes = arrayOf(Index(value = "cityName"), Index(value = "provinceName")))
 class CityBean {
     @Id(autoincrement = true)
