@@ -155,8 +155,8 @@ class CityWeatherFragment : Fragment() {
             val currProvinceName = data.getStringExtra("province")
             val currTownName = data.getStringExtra("town")
 
-            getWeatherDataSp().edit().putString("province", currProvinceName)
-                    .putString("city", currCityName).putString("town", currTownName).apply()
+            getWeatherDataSp().edit().putString(WeatherSpKey.provinceName, currProvinceName)
+                    .putString(WeatherSpKey.cityName, currCityName).putString(WeatherSpKey.townName, currTownName).apply()
             getWeatherDetail(currProvinceName, currCityName, currTownName)
         }
     }

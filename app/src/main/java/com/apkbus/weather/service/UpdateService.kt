@@ -15,9 +15,9 @@ import com.apkbus.weather.utils.getWeatherDataSp
 class UpdateService : IntentService("updateWeather") {
     override fun onHandleIntent(p0: Intent?) {
         val sp = getWeatherDataSp()
-        val pName: String = sp.getString("province", "江苏")
-        val cName: String = sp.getString("city", "苏州")
-        val tName: String = sp.getString("town", "苏州")
+        val pName: String = sp.getString(WeatherSpKey.provinceName, "江苏")
+        val cName: String = sp.getString(WeatherSpKey.cityName, "苏州")
+        val tName: String = sp.getString(WeatherSpKey.townName, "吴中")
 
         ApiHelper.getWeatherDetail(null, pName, cName, tName, object : ApiCallBack {
             override fun onSuccess(result: String) {
