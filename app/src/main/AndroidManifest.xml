@@ -23,9 +23,8 @@
 
         <activity
             android:name=".activity.MainActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
 
-        </activity>
         <activity
             android:name=".activity.SplashActivity"
             android:label="@string/app_name"
@@ -40,7 +39,9 @@
             android:label="选择地区"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <service android:name=".service.UpdateService"/>
+
+        <service android:name=".service.UpdateService" />
+        <activity android:name=".library.app.SwipeBackActivity" />
     </application>
 
 </manifest>

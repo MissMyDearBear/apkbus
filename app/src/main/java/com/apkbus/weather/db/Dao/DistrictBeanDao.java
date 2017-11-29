@@ -143,5 +143,4 @@ public class DistrictBeanDao extends AbstractDao<DistrictBean, Long> {
     protected final boolean isEntityUpdateable() {
         return true;
     }
-    
 }

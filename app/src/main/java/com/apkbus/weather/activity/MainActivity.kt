@@ -13,13 +13,15 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : BaseActivity() {
     private var city: String? = ""
     private var province: String? = ""
+    private var town: String? = ""
     private var fragment: CityWeatherFragment? = null
 
     companion object {
-        fun action(activity: BaseActivity?, city: String, province: String) {
+        fun action(activity: BaseActivity?, city: String, province: String, town: String?) {
             val intent = Intent(activity, MainActivity::class.java)
             intent.putExtra("city", city)
             intent.putExtra("province", province)
+            intent.putExtra("town", town)
             activity?.startActivity(intent)
         }
     }
@@ -28,17 +30,20 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         CityUtils.getAllCities(this)
-        root.setBackgroundResource(R.drawable.bg_main)
+        container.setBackgroundResource(R.drawable.bg_main)
+        mActivity.setSwipeBackEnable(false)
 
         if (intent != null) {
             city = intent.getStringExtra("city")
             province = intent.getStringExtra("province")
+            town = intent.getStringExtra("town")
         }
 
         fragment = CityWeatherFragment()
         val bundle = Bundle()
         bundle.putString("city", city)
         bundle.putString("province", province)
+        bundle.putString("town", town)
         fragment!!.arguments = bundle
         supportFragmentManager.beginTransaction().add(R.id.container, fragment).commit()
         UpdateService.startUpdateService(mActivity)
@@ -49,7 +54,6 @@ class MainActivity : BaseActivity() {
         fragment?.onActivityResult(requestCode, resultCode, data)
     }
 
-
     private var lastBackPress: Long = 0
     override fun onBackPressed() {
         val time = System.currentTimeMillis()
@@ -59,9 +63,7 @@ class MainActivity : BaseActivity() {
             super.onBackPressed()
         } else {
             lastBackPress = time
-            showToast(mActivity, "再按一次退出巴士天气")
-
+            showToast(mActivity, "2秒内双击退出“巴士天气”")
         }
-
     }
 }

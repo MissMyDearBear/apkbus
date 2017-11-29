@@ -13,11 +13,6 @@ import com.apkbus.weather.entry.CityResult
 import java.util.*
 import kotlin.collections.ArrayList
 
-/**
- * description:
- * author: bear .
- * Created date:  2017/10/10.
- */
 object CityUtils {
     val LEVEL_PROVINCE = 0//省 直辖市 自治区
     val LEVEL_CITY = 1//市
@@ -31,17 +26,17 @@ object CityUtils {
         ApiHelper.get(activity, "/weather/citys", params, object : ApiCallBack {
             override fun onSuccess(result: String) {
                 val bean = GsonUtils.jsonToClass(result, CityResult::class.java)
-                var provinceId=0
-                var cityId=0
-                var districtId=0
-                val pList=ArrayList<ProvinceBean>()
-                val cList=ArrayList<CityBean>()
-                val dList=ArrayList<DistrictBean>()
+                var provinceId = 0
+                var cityId = 0
+                var districtId = 0
+                val pList = ArrayList<ProvinceBean>()
+                val cList = ArrayList<CityBean>()
+                val dList = ArrayList<DistrictBean>()
                 if (bean?.result != null && bean.result!!.isNotEmpty()) {
                     for (resultBean in bean.result!!) {
                         val province = ProvinceBean()
                         province.provinceName = resultBean.province
-                        province.id= provinceId.toLong()
+                        province.id = provinceId.toLong()
                         pList.add(province)
                         provinceId++
                         if (resultBean.city != null && resultBean.city!!.isNotEmpty()) {
@@ -49,7 +44,7 @@ object CityUtils {
                                 val city = CityBean()
                                 city.cityName = cityBean.city
                                 city.provinceName = resultBean.province
-                                city.id=cityId.toLong()
+                                city.id = cityId.toLong()
                                 cList.add(city)
 
                                 cityId++
@@ -58,7 +53,7 @@ object CityUtils {
                                         val district = DistrictBean()
                                         district.cityName = cityBean.city
                                         district.districtName = districtBean.district
-                                        district.id=districtId.toLong()
+                                        district.id = districtId.toLong()
                                         dList.add(district)
                                         districtId++
                                     }

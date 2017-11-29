@@ -28,6 +28,7 @@ class CityWeatherFragment : Fragment() {
     private val REQUSET_SELECT_CITY = 1101
     private var province: String? = ""
     private var city: String? = ""
+    private var town: String? = ""
     private var mActivity = this.activity
 
     private val TAG_API = "ApiCallBack:"
@@ -42,7 +43,7 @@ class CityWeatherFragment : Fragment() {
         super.onCreate(savedInstanceState)
         city = arguments.getString("city")
         province = arguments.getString("province")
-
+        town = arguments.getString("town")
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -57,31 +58,31 @@ class CityWeatherFragment : Fragment() {
             this.activity.startActivityForResult(intent, REQUSET_SELECT_CITY)
         })
         if (TextUtils.isEmpty(province) && TextUtils.isEmpty(city)) {
-            province = "北京"
-            city = "北京"
+            province = "江苏"
+            city = "苏州"
+            town = "吴中"
         }
         onRefresh()
         grid?.layoutManager = LinearLayoutManager(mActivity, LinearLayoutManager.HORIZONTAL, false)
         grid?.adapter = gridAdapter
-        recycler?.layoutManager = LinearLayoutManager(mActivity, LinearLayoutManager.HORIZONTAL, false)
+        recycler?.layoutManager = LinearLayoutManager(mActivity, LinearLayoutManager.VERTICAL, false)
+        recycler.isNestedScrollingEnabled = false
         recycler?.adapter = recyclerAdapter
-
     }
 
-    fun onRefresh() {
-        var json = getWeatherDataSp().getString(WeatherSpKey.data, "")
-        if (!TextUtils.isEmpty(json)) {
-            dealWeatherJson(json, province, city)
+    private fun onRefresh() {
+        if (!TextUtils.isEmpty(getWeatherDataSp().getString(WeatherSpKey.data, ""))) {
+            dealWeatherJson(getWeatherDataSp().getString(WeatherSpKey.data, ""), province, city, town)
         } else {
-            getWeatherDetail(province, city)
+            getWeatherDetail(province, city, town)
         }
     }
 
-    private fun getWeatherDetail(province: String?, city: String?) {
-        ApiHelper.getWeatherDetail(this.activity, province, city, object : ApiCallBack {
+    private fun getWeatherDetail(province: String?, city: String?, town: String?) {
+        ApiHelper.getWeatherDetail(this.activity, province, city, town, object : ApiCallBack {
             override fun onSuccess(result: String) {
                 getWeatherDataSp().edit().putString(WeatherSpKey.data, result).apply()
-                dealWeatherJson(result, province, city)
+                dealWeatherJson(result, province, city, town)
             }
 
             override fun onError(msg: String) {
@@ -90,16 +91,32 @@ class CityWeatherFragment : Fragment() {
         })
     }
 
-    private fun dealWeatherJson(result: String, province: String?, city: String?) {
+    private fun dealWeatherJson(result: String, province: String?, city: String?, town: String?) {
         if (!TextUtils.isEmpty(result)) {
             weatherBean = GsonUtils.jsonToClass(result, WeatherBean::class.java)
-            tenDayWeatherDetail.clear()
-            tenDayWeatherDetail.addAll(weatherBean?.result?.get(0)?.future!!)
-            recyclerAdapter.notifyDataSetChanged()
-            toText(address, province + "——" + city)
+            if (weatherBean?.result?.get(0)?.future != null && weatherBean?.result?.get(0)?.future!!.isNotEmpty()) {
+                tenDayWeatherDetail.clear()
+                tenDayWeatherDetail.addAll(weatherBean?.result?.get(0)?.future!!)
+                recyclerAdapter.notifyDataSetChanged()
+            }
+            if (!TextUtils.isEmpty(town)) {
+                toText(address, "$province—$city—$town")
+            } else {
+                toText(address, "$province—$city")
+            }
             toText(big_temperature, weatherBean?.result?.get(0)?.temperature)
-            toText(weather, "天气情况：" + weatherBean?.result?.get(0)?.weather)
-            toText(airCondition, "空气质量：" + weatherBean?.result?.get(0)?.airCondition)
+            if (weatherBean?.result?.get(0)?.future?.size == 0)
+                tv_count.text = "没有未来天气预报"
+            else
+                tv_count.text = "未来" + weatherBean?.result?.get(0)?.future?.size + "日天气预报"
+            if (TextUtils.isEmpty(weatherBean?.result?.get(0)?.weather))
+                weather.text = "天气情况：不详"
+            else
+                weather.text = "天气情况：" + weatherBean?.result?.get(0)?.weather
+            if (TextUtils.isEmpty(weatherBean?.result?.get(0)?.weather))
+                airCondition.text = "空气质量：不详"
+            else
+                airCondition.text = "空气质量：" + weatherBean?.result?.get(0)?.airCondition
             currWeatherDetail.clear()
             currWeatherDetail.add(0, IndexBean("风向风力", weatherBean?.result?.get(0)?.wind))
             currWeatherDetail.add(1, IndexBean("日出时间", weatherBean?.result?.get(0)?.sunrise))
@@ -107,40 +124,40 @@ class CityWeatherFragment : Fragment() {
             currWeatherDetail.add(3, IndexBean("锻炼指数", weatherBean?.result?.get(0)?.exerciseIndex))
             currWeatherDetail.add(4, IndexBean("穿衣指数", weatherBean?.result?.get(0)?.dressingIndex))
             currWeatherDetail.add(5, IndexBean("洗衣指数", weatherBean?.result?.get(0)?.washIndex))
-            gridAdapter?.notifyDataSetChanged()
+            gridAdapter.notifyDataSetChanged()
         }
     }
 
     class MyGridViewAdapter(layoutRes: Int, datas: List<IndexBean>?) :
             BaseQuickAdapter<IndexBean, BaseViewHolder>(layoutRes, datas) {
         override fun convert(viewHolder: BaseViewHolder?, item: IndexBean) {
-            toText(viewHolder!!.getView<TextView>(R.id.item_key), item.indexName)
-            toText(viewHolder.getView<TextView>(R.id.item_value), item.indexContent)
+            toText(viewHolder!!.getView(R.id.item_key), item.indexName)
+            toText(viewHolder.getView(R.id.item_value), item.indexContent)
         }
     }
 
     class MyRecyclerViewAdapter(layoutRes: Int, datas: List<WeatherBean.ResultBean.FutureBean>?) :
             BaseQuickAdapter<WeatherBean.ResultBean.FutureBean, BaseViewHolder>(layoutRes, datas) {
         override fun convert(viewHolder: BaseViewHolder?, item: WeatherBean.ResultBean.FutureBean) {
-            toText(viewHolder!!.getView<TextView>(R.id.date), item.date)
-            toText(viewHolder.getView<TextView>(R.id.dayTime), item.dayTime)
-            toText(viewHolder.getView<TextView>(R.id.night), item.night)
-            toText(viewHolder.getView<TextView>(R.id.temperature_section), item.temperature)
-            toText(viewHolder.getView<TextView>(R.id.wind), item.wind)
-            toText(viewHolder.getView<TextView>(R.id.week), item.week)
+            toText(viewHolder!!.getView(R.id.date), item.date)
+            toText(viewHolder.getView(R.id.dayTime), item.dayTime)
+            toText(viewHolder.getView(R.id.night), item.night)
+            toText(viewHolder.getView(R.id.temperature_section), item.temperature)
+            toText(viewHolder.getView(R.id.wind), item.wind)
+            toText(viewHolder.getView(R.id.week), item.week)
         }
     }
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUSET_SELECT_CITY && resultCode == Activity.RESULT_OK && data != null) {
-            val currCityName = data.getStringExtra("cityName")
-            val currProvinceName = data.getStringExtra("provinceName")
+            val currCityName = data.getStringExtra("city")
+            val currProvinceName = data.getStringExtra("province")
+            val currTownName = data.getStringExtra("town")
 
-            getWeatherDataSp().edit().putString("provinceName", currProvinceName)
-                    .putString("cityName", currCityName).apply()
-            getWeatherDetail(currProvinceName, currCityName)
+            getWeatherDataSp().edit().putString("province", currProvinceName)
+                    .putString("city", currCityName).putString("town", currTownName).apply()
+            getWeatherDetail(currProvinceName, currCityName, currTownName)
         }
     }
 
@@ -148,11 +165,10 @@ class CityWeatherFragment : Fragment() {
         // TextView非空赋值，空划线
         fun toText(text: TextView, str: String?) {
             if (TextUtils.isEmpty(str)) {
-                text.text = "----"
+                text.text = "不详"
             } else {
                 text.text = str
             }
         }
     }
-
 }

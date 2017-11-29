@@ -7,13 +7,7 @@ import com.apkbus.weather.R
 import com.apkbus.weather.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_splash.*
 
-/**
- * description:
- * author: bear .
- * Created date:  2017/10/18.
- */
 class SplashActivity : BaseActivity(), SurfaceHolder.Callback {
-
     override fun surfaceChanged(p0: SurfaceHolder?, p1: Int, p2: Int, p3: Int) {
     }
 
@@ -36,20 +30,18 @@ class SplashActivity : BaseActivity(), SurfaceHolder.Callback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-        var surfaceHolder = surfaceView.holder
+        mActivity.setSwipeBackEnable(false)
+        val surfaceHolder = surfaceView.holder
         surfaceHolder.addCallback(this)
         btn.setOnClickListener({
-            MainActivity.action(mActivity, "苏州", "江苏")
+            MainActivity.action(mActivity, "江苏", "苏州", "吴中")
             finish()
         })
-
     }
-
 
     override fun onDestroy() {
         super.onDestroy()
         media?.release()
         media = null
     }
-
 }

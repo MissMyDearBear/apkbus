@@ -143,5 +143,4 @@ public class CityBeanDao extends AbstractDao<CityBean, Long> {
     protected final boolean isEntityUpdateable() {
         return true;
     }
-    
 }
