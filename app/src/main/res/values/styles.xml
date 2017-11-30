@@ -21,6 +21,18 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <!-- FONT STYLE -->
+    <style name="temperature_58sp_green">
+        <item name="android:textSize">58sp</item>
+        <item name="android:textColor">@color/green</item>
+    </style>
+    <style name="temperature_68sp_green">
+        <item name="android:textSize">68sp</item>
+        <item name="android:textColor">@color/green</item>
+    </style>
+    <style name="temperature_48sp_green">
+        <item name="android:textSize">48sp</item>
+        <item name="android:textColor">@color/green</item>
+    </style>
     <style name="temperature_38sp_green">
         <item name="android:textSize">38sp</item>
         <item name="android:textColor">@color/green</item>
@@ -57,6 +69,18 @@
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/redA</item>
     </style>
+    <style name="font_20sp_redA">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/redA</item>
+    </style>
+    <style name="font_20sp_redF">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/redF</item>
+    </style>
+    <style name="font_25sp_redA">
+        <item name="android:textSize">25sp</item>
+        <item name="android:textColor">@color/redA</item>
+    </style>
     <style name="font_12sp_grayA">
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/grayA</item>
@@ -73,9 +97,9 @@
         <item name="android:textSize">15sp</item>
         <item name="android:textColor">@color/grayA</item>
     </style>
-    <style name="font_16sp_grayA">
+    <style name="font_16sp_black">
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/redA</item>
+        <item name="android:textColor">@color/black</item>
     </style>
     <style name="font_18sp_grayA">
         <item name="android:textSize">18sp</item>

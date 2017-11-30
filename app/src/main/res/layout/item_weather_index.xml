@@ -5,12 +5,14 @@
     android:layout_height="wrap_content"
     android:layout_weight="1"
     android:gravity="center"
-    android:orientation="vertical"
-    android:padding="@dimen/dp_10">
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp"
+    android:paddingRight="20dp"
+    android:orientation="vertical" >
 
     <TextView
         android:id="@+id/item_key"
-        style="@style/font_14sp_grayA"
+        style="@style/font_16sp_black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"

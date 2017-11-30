@@ -2,6 +2,7 @@ package com.apkbus.weather.fragment
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -57,10 +58,10 @@ class CityWeatherFragment : Fragment() {
             val intent = Intent(this.activity, ChooseLocationActivity::class.java)
             this.activity.startActivityForResult(intent, REQUSET_SELECT_CITY)
         })
-        if (TextUtils.isEmpty(province) && TextUtils.isEmpty(city)) {
-            province = "江苏"
-            city = "苏州"
-            town = "吴中"
+        when{
+            TextUtils.isEmpty(province) -> province = "江苏"
+            TextUtils.isEmpty(city) -> city = "苏州"
+            TextUtils.isEmpty(town) -> town = "吴中"
         }
         onRefresh()
         grid?.layoutManager = LinearLayoutManager(mActivity, LinearLayoutManager.HORIZONTAL, false)
@@ -102,28 +103,28 @@ class CityWeatherFragment : Fragment() {
             if (!TextUtils.isEmpty(town)) {
                 toText(address, "$province—$city—$town")
             } else {
-                toText(address, "$province—$city")
+                toText(address, "哦呦少林郎，木有地址爪子查天气嘛")
             }
             toText(big_temperature, weatherBean?.result?.get(0)?.temperature)
-            if (weatherBean?.result?.get(0)?.future?.size == 0)
-                tv_count.text = "没有未来天气预报"
+            if (weatherBean?.result?.get(0)?.future?.size != 0 && weatherBean?.result?.get(0)?.future != null)
+                tv_count.text = "·未来" + weatherBean?.result?.get(0)?.future?.size + "日天气预报"
             else
-                tv_count.text = "未来" + weatherBean?.result?.get(0)?.future?.size + "日天气预报"
+                tv_count.text = "天气预报跑丢了？没关系，所有的东西都跑丢了呢T_T"
             if (TextUtils.isEmpty(weatherBean?.result?.get(0)?.weather))
-                weather.text = "天气情况：不详"
+                weather.text = "天气情况：走失ing"
             else
                 weather.text = "天气情况：" + weatherBean?.result?.get(0)?.weather
             if (TextUtils.isEmpty(weatherBean?.result?.get(0)?.weather))
-                airCondition.text = "空气质量：不详"
+                airCondition.text = "空气质量：走失ing"
             else
                 airCondition.text = "空气质量：" + weatherBean?.result?.get(0)?.airCondition
             currWeatherDetail.clear()
-            currWeatherDetail.add(0, IndexBean("风向风力", weatherBean?.result?.get(0)?.wind))
-            currWeatherDetail.add(1, IndexBean("日出时间", weatherBean?.result?.get(0)?.sunrise))
-            currWeatherDetail.add(2, IndexBean("日落时间", weatherBean?.result?.get(0)?.sunset))
-            currWeatherDetail.add(3, IndexBean("锻炼指数", weatherBean?.result?.get(0)?.exerciseIndex))
-            currWeatherDetail.add(4, IndexBean("穿衣指数", weatherBean?.result?.get(0)?.dressingIndex))
-            currWeatherDetail.add(5, IndexBean("洗衣指数", weatherBean?.result?.get(0)?.washIndex))
+            currWeatherDetail.add(0, IndexBean("·风向风力·", weatherBean?.result?.get(0)?.wind))
+            currWeatherDetail.add(1, IndexBean("·日出时间·", weatherBean?.result?.get(0)?.sunrise))
+            currWeatherDetail.add(2, IndexBean("·日落时间·", weatherBean?.result?.get(0)?.sunset))
+            currWeatherDetail.add(3, IndexBean("·锻炼指数·", weatherBean?.result?.get(0)?.exerciseIndex))
+            currWeatherDetail.add(4, IndexBean("·穿衣指数·", weatherBean?.result?.get(0)?.dressingIndex))
+            currWeatherDetail.add(5, IndexBean("·洗衣指数·", weatherBean?.result?.get(0)?.washIndex))
             gridAdapter.notifyDataSetChanged()
         }
     }
@@ -167,9 +168,10 @@ class CityWeatherFragment : Fragment() {
         // TextView非空赋值，空划线
         fun toText(text: TextView, str: String?) {
             if (TextUtils.isEmpty(str)) {
-                text.text = "不详"
+                text.text = "走失ing"
             } else {
                 text.text = str
+                text.typeface = Typeface.defaultFromStyle(Typeface.BOLD)
             }
         }
     }
