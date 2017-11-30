@@ -30,7 +30,7 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         CityUtils.getAllCities(this)
-        container.setBackgroundResource(R.drawable.bg_main)
+        container.setBackgroundResource(R.drawable.bg3)
         mActivity.setSwipeBackEnable(false)
 
         if (intent != null) {

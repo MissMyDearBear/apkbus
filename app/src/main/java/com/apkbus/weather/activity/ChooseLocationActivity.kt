@@ -35,7 +35,7 @@ class ChooseLocationActivity : BaseActivity(), OnWheelChangedListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_choose_location)
-        root.setBackgroundResource(R.drawable.bg_city_select)
+        root.setBackgroundResource(R.drawable.bg2)
 
         initWheelViews()
         setOnWheelChangeListener()

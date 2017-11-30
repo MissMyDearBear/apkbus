@@ -2,49 +2,52 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:padding="15dp"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="15dp">
 
     <TextView
         android:id="@+id/address"
-        style="@style/font_20sp_green"
+        style="@style/font_20sp_redA"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:drawableLeft="@drawable/local"
         android:drawablePadding="@dimen/dp_4"
         tools:text="苏州" />
 
     <TextView
         android:id="@+id/big_temperature"
-        style="@style/temperature_38sp_green"
+        style="@style/temperature_68sp_green"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_10"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:textScaleX="1.3"
         tools:text="21°C " />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="25dp"
         android:orientation="vertical"
         tools:background="#eee">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_10"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/weather"
-                style="@style/font_15sp_redA"
+                style="@style/font_20sp_redA"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="晴" />
 
             <TextView
                 android:id="@+id/airCondition"
-                style="@style/font_15sp_redA"
+                style="@style/font_20sp_redA"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
@@ -55,21 +58,19 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/grid"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_10" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/tv_count"
-            style="@style/font_16sp_redA"
+            style="@style/font_20sp_redA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginBottom="20dp"
             android:text="@string/future_ten_days_weather_prediction" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/dp_10" />
+            android:layout_height="match_parent" />
     </LinearLayout>
 </LinearLayout>
