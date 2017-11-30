@@ -18,7 +18,7 @@
 
     <TextView
         android:id="@+id/item_value"
-        style="@style/font_23sp_blueF"
+        style="@style/font_23sp_green"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="不建议" />

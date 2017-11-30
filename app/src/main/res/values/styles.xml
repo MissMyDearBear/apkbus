@@ -21,33 +21,33 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <!-- FONT STYLE -->
-    <style name="temperature_38sp_blueF">
+    <style name="temperature_38sp_green">
         <item name="android:textSize">38sp</item>
-        <item name="android:textColor">@color/blueF</item>
+        <item name="android:textColor">@color/green</item>
     </style>
-    <style name="temperature_28sp_blueF">
+    <style name="temperature_28sp_green">
         <item name="android:textSize">28sp</item>
-        <item name="android:textColor">@color/blueF</item>
+        <item name="android:textColor">@color/green</item>
     </style>
-    <style name="temperature_33sp_blueF">
+    <style name="temperature_33sp_green">
         <item name="android:textSize">33sp</item>
-        <item name="android:textColor">@color/blueF</item>
+        <item name="android:textColor">@color/green</item>
     </style>
-    <style name="temperature_43sp_blueF">
+    <style name="temperature_43sp_green">
         <item name="android:textSize">43sp</item>
-        <item name="android:textColor">@color/blueF</item>
+        <item name="android:textColor">@color/green</item>
     </style>
-    <style name="font_23sp_blueF">
+    <style name="font_23sp_green">
         <item name="android:textSize">23sp</item>
-        <item name="android:textColor">@color/blueF</item>
+        <item name="android:textColor">@color/green</item>
     </style>
-    <style name="font_20sp_blueF">
+    <style name="font_20sp_green">
         <item name="android:textSize">20sp</item>
-        <item name="android:textColor">@color/blueF</item>
+        <item name="android:textColor">@color/green</item>
     </style>
-    <style name="font_16sp_blueF">
+    <style name="font_16sp_green">
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/blueF</item>
+        <item name="android:textColor">@color/green</item>
     </style>
     <style name="font_15sp_redA">
         <item name="android:textSize">15sp</item>

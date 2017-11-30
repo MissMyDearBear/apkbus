@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/apkbus.iml" filepath="$PROJECT_DIR$/apkbus.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://D:\Android\apkbus\wheel\wheel.iml" filepath="D:\Android\apkbus\wheel\wheel.iml" />
     </modules>
   </component>
 </project>
