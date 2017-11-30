@@ -12,37 +12,31 @@ import com.apkbus.weather.api.ApiHelper
 import com.apkbus.weather.sharedPreference.WeatherSpKey
 import com.apkbus.weather.utils.getWeatherDataSp
 
-/**
- * description:
- * author: bear .
- * Created date:  2017/10/20.
- */
 class UpdateService : IntentService("updateWeather") {
-
     override fun onHandleIntent(p0: Intent?) {
         val sp = getWeatherDataSp()
-        var pName: String = sp.getString(WeatherSpKey.provinceName, "北京")
-        var cName: String = sp.getString(WeatherSpKey.cityName, "北京")
+        val pName: String = sp.getString(WeatherSpKey.provinceName, "江苏")
+        val cName: String = sp.getString(WeatherSpKey.cityName, "苏州")
+        val tName: String = sp.getString(WeatherSpKey.townName, "吴中")
 
-        ApiHelper.getWeatherDetail(null, pName, cName, object : ApiCallBack {
+        ApiHelper.getWeatherDetail(null, pName, cName, tName, object : ApiCallBack {
             override fun onSuccess(result: String) {
                 getWeatherDataSp().edit().putString(WeatherSpKey.data, result).apply()
             }
 
             override fun onError(msg: String) {
             }
-
         })
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        var manager: AlarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val manager: AlarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
         val refreshTime = 8 * 60 * 60 * 1000
 
-        var triggerAtTime = SystemClock.elapsedRealtime() + refreshTime
+        val triggerAtTime = SystemClock.elapsedRealtime() + refreshTime
         val intent = Intent(this, UpdateService::class.java)
-        var pi = PendingIntent.getService(this, 0, intent, 0)
+        val pi = PendingIntent.getService(this, 0, intent, 0)
         manager.cancel(pi)
         manager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerAtTime, pi)
         println("调用时间：" + System.currentTimeMillis().toString())
@@ -51,9 +45,8 @@ class UpdateService : IntentService("updateWeather") {
 
     companion object {
         fun startUpdateService(activity: Activity) {
-            var intent = Intent(activity, UpdateService::class.java)
+            val intent = Intent(activity, UpdateService::class.java)
             activity.startService(intent)
         }
     }
-
 }

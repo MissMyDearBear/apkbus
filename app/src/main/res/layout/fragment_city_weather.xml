@@ -1,32 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:padding="15dp"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/address"
+        style="@style/font_20sp_blueF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/local"
+        android:drawablePadding="@dimen/dp_4"
+        tools:text="苏州" />
+
+    <TextView
+        android:id="@+id/big_temperature"
+        style="@style/temperature_38sp_blueF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        tools:text="21°C " />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="15dp"
         tools:background="#eee">
-
-        <TextView
-            android:id="@+id/address"
-            android:drawablePadding="@dimen/dp_4"
-            android:drawableLeft="@drawable/local"
-            style="@style/font_20sp_blueF"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="苏州" />
-
-        <TextView
-            android:id="@+id/big_temperature"
-            style="@style/temperature_38sp_blueF"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_10"
-            tools:text="21°C " />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,10 +56,10 @@
             android:id="@+id/grid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_10"
-            android:background="@color/grayE" />
+            android:layout_marginTop="@dimen/dp_10" />
 
         <TextView
+            android:id="@+id/tv_count"
             style="@style/font_16sp_redA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -68,8 +69,7 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_10"
-            android:background="@color/grayE" />
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dp_10" />
     </LinearLayout>
-</ScrollView>
+</LinearLayout>

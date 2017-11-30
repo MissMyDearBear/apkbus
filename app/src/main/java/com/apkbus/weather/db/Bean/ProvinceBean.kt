@@ -6,11 +6,6 @@ import org.greenrobot.greendao.annotation.Generated
 import org.greenrobot.greendao.annotation.Id
 import org.greenrobot.greendao.annotation.Index
 
-/**
- * description:
- * author: bear .
- * Created date:  2017/10/10.
- */
 @Entity(indexes = arrayOf(Index(value = "provinceName")))
 class ProvinceBean {
     @Id(autoincrement = true)

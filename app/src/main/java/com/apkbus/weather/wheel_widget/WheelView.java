@@ -1,7 +1,7 @@
 /*
  *  Android Wheel Control.
  *  https://code.google.com/p/android-wheel/
- * 
+ *
  *  Copyright 2011 Yuri Kanivets
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -38,32 +38,18 @@ import com.apkbus.weather.wheel_widget.adapters.WheelViewAdapter;
 import java.util.LinkedList;
 import java.util.List;
 
-
-/**
- * Numeric wheel view.
- *
- * @author Yuri Kanivets
- */
 public class WheelView extends View {
 
-    /**
-     * Top and bottom shadows colors
-     */
+    // Top and bottom shadows colors
     private int[] SHADOWS_COLORS = new int[]{0xFF111111, 0x00AAAAAA, 0x00AAAAAA};
 
-    /**
-     * Top and bottom items offset (to hide that)
-     */
+    // Top and bottom items offset (to hide that)
     private static final int ITEM_OFFSET_PERCENT = 0;
 
-    /**
-     * Left and right padding value
-     */
+    // Left and right padding value
     private static final int PADDING = 10;
 
-    /**
-     * Default count of visible items
-     */
+    // Default count of visible items
     private static final int DEF_VISIBLE_ITEMS = 5;
 
     // Wheel Values
@@ -304,9 +290,8 @@ public class WheelView extends View {
      * Notifies listeners about ending scrolling
      */
     protected void notifyScrollingListenersAboutEnd() {
-        for (OnWheelScrollListener listener : scrollingListeners) {
+        for (OnWheelScrollListener listener : scrollingListeners)
             listener.onScrollingFinished(this);
-        }
     }
 
     /**
@@ -331,9 +316,8 @@ public class WheelView extends View {
      * Notifies listeners about clicking
      */
     protected void notifyClickListenersAboutClick(int item) {
-        for (OnWheelClickedListener listener : clickingListeners) {
+        for (OnWheelClickedListener listener : clickingListeners)
             listener.onItemClicked(this, item);
-        }
     }
 
     /**
@@ -352,9 +336,7 @@ public class WheelView extends View {
      * @param animated the animation flag
      */
     public void setCurrentItem(int index, boolean animated) {
-        if (viewAdapter == null || viewAdapter.getItemsCount() == 0) {
-            return; // throw?
-        }
+        if (viewAdapter == null || viewAdapter.getItemsCount() == 0) return; // throw?
 
         int itemCount = viewAdapter.getItemsCount();
         if (index < 0 || index >= itemCount) {
@@ -774,8 +756,8 @@ public class WheelView extends View {
     /**
      * Scroll the wheel
      *
-     * @param itemsToSkip items to scroll
-     * @param time        scrolling duration
+     * @param itemsToScroll items to scroll
+     * @param time          scrolling duration
      */
     public void scroll(int itemsToScroll, int time) {
         int distance = itemsToScroll * getItemHeight() - scrollingOffset;
@@ -831,29 +813,30 @@ public class WheelView extends View {
             updated = true;
         }
 
-        if (!updated) {
-            updated = firstItem != range.getFirst() || itemsLayout.getChildCount() != range.getCount();
-        }
+        if (range != null) {
+            if (!updated) {
+                updated = firstItem != range.getFirst() || itemsLayout.getChildCount() != range.getCount();
+            }
 
-        if (firstItem > range.getFirst() && firstItem <= range.getLast()) {
-            for (int i = firstItem - 1; i >= range.getFirst(); i--) {
-                if (!addViewItem(i, true)) {
-                    break;
+            if (firstItem > range.getFirst() && firstItem <= range.getLast()) {
+                for (int i = firstItem - 1; i >= range.getFirst(); i--) {
+                    if (!addViewItem(i, true)) {
+                        break;
+                    }
+                    firstItem = i;
                 }
-                firstItem = i;
+            } else {
+                firstItem = range.getFirst();
             }
-        } else {
-            firstItem = range.getFirst();
-        }
 
-        int first = firstItem;
-        for (int i = itemsLayout.getChildCount(); i < range.getCount(); i++) {
-            if (!addViewItem(firstItem + i, false) && itemsLayout.getChildCount() == 0) {
-                first++;
+            int first = firstItem;
+            for (int i = itemsLayout.getChildCount(); i < range.getCount(); i++) {
+                if (!addViewItem(firstItem + i, false) && itemsLayout.getChildCount() == 0) {
+                    first++;
+                }
             }
+            firstItem = first;
         }
-        firstItem = first;
-
         return updated;
     }
 
