@@ -1,32 +1,41 @@
-经过前面的学习，相信大家对Android有了更加深入地了解，所谓学以致用，接下来我们就进入实战的课程。
+#### 作者序：
 
+本章乃由安卓巴士业余博主bear&&fightingMarmot合作编撰而成。坐标千年名城——姑苏。
+此二人皆乃蓬勃朝气有理想、热血豪迈志比天、即将在除夕夜街头放飞梦想的有志青年，因此本文值得各位看官一阅，有钱捧个钱场，没钱捧个人场撒？
+
+常言道，一重山水一重天，山重水重天外天，纷繁馥郁尘嚣上，我自归去笔耕田。人间四月繁花灿，隔山重水在眼前，相逢何必曾相识，聊以片语慰生平。人来人往，复又去来兮，相逢若是有缘，何若留存一眼面缘，点个赞？
+
+#### 本文序：
+本文阐述了一款名为“巴士天气”的入门级Android-APP的开发全程。本文中所述的APP旨在用Kotlin语言为Android初级学习者提供一次完整的APP开发实践。
+在APP设计过程中作者融合了Activity的生命周期、信息传递、数据库、网络连接、接口调用、自定义数据结构、UI设计、Service后台服务、SharePreferences共享参数、引入第三方开源库等多方面知识，同时采取简洁开发策略，使用尽可能简单的UI界面来涵盖更多的内容，做到使APP在满足开发简洁的同时包含了更多元的知识。
+经过前面的学习，相信大家对Android有了更加深入地了解，所谓学以致用，接下来我们将进入实战的课程。
 
 完成一个完整的应用（Application，后面简称App），要明白做的是什么？需要什么？如何去做？Android知识广博我们不可能在短短的时间去掌握所有的知识，所以我们要根据自己所需，分析每个功能需要什么资源，用什么方式去写，然后带着问题回头去学习所需的知识最终解决问题。本章将以“巴士天气”为例，教会大家创建Android应用。
 
-## 12.1 功能需求及技术可行性分析
-在开始编码之前，我们需要先对App进行需求分析，想一想一款天气预报工具应该具备哪些功能。将这些功能全部整理出来之后，我们才好动手去一一实现。这里我整理了一下，巴士天气中至少应该具备以下功能：
-- 可以罗列出全国所有的省、市县
-- 可以查看全国任意城市的天气信息
-- 可以自由切换城市，去查看其他城市的天气
-- 后台自动更新
-- 可以应用到多媒体功能
+12.1 功能需求及技术可行性分析
 
+在开始编码之前，我们需要先对App进行需求分析，想一想一款天气预报工具应该具备哪些功能。将这些功能全部整理出来之后，我们才好动手去一一实现。这里我整理了一下，巴士天气中至少应该具备以下功能：
+
+可以罗列出全国所有的省、市县
+可以查看全国任意城市的天气信息
+可以自由切换城市，去查看其他城市的天气
+后台自动更新
+可以应用到多媒体功能
 虽然看上去只有5个主要的功能点，但如果想要全部实现这些功能却需要用到UI、网络、数据存储、服务，多媒体等技术，因此还是非常考验你的综合应用能力的。不过好在这些技术在前面的章节中我们我们全部都学习过了，只要你学得用心，相信完成这些功能对你来说并不难。
 
-分析完了需求之后，接下来就要进行技术可行性分析了。首先要考虑的问题就是全国的各省市，以及对应的天气数据源。正好安卓巴士有合作方提供了相关的Api可以满足。[Mob.com](http://api.mob.com/#/apiwiki/weather)到官网可以看到有两个Api刚好满足我们的需求：
-1. 根据城市名查询天气（http://apicloud.mob.com/v1/weather/query）
+分析完了需求之后，接下来就要进行技术可行性分析了。首先要考虑的问题就是全国的各省市，以及对应的天气数据源。正好安卓巴士有合作方提供了相关的Api可以满足。Mob.com到官网可以看到有两个Api刚好满足我们的需求：
 
-
+根据城市名查询天气（http://apicloud.mob.com/v1/weather/query）
 请求方式：GET
 
 请求参数：
-名称 | 类型| 必填| 说明
----|---|---|---
-key | string| 是| 用户申请的appkey（可以直接用网站的测试AppKey-520520test）
-city | string| 是| 城市名
-province | string| 是| 当前城市的所属胜负 如：北京-通州、江苏-南通（url编码）
+
+名称	类型	必填	说明
+key	string	是	用户申请的appkey（可以直接用网站的测试AppKey-520520test）
+city	string	是	城市名
+province	string	是	当前城市的所属省市 如：北京-北京-通州、江苏-苏州-吴中（url编码）
 Json返回实例：
-```
+
 {
   "msg": "success",
   "result": [
@@ -127,20 +136,17 @@ Json返回实例：
   ],
   "retCode": "200"
 }
-```
-2. 城市列表查询接口（http://apicloud.mob.com/v1/weather/citys）
-
+城市列表查询接口（http://apicloud.mob.com/v1/weather/citys）
 请求方式：GET
 
 请求参数：
-名称 | 类型| 必填| 说明
----|---|---|---
-key | string| 是| 用户申请的appkey
+
+名称	类型	必填	说明
+key	string	是	用户申请的appkey
 （可以直接用网站的测试AppKey-520520test）
 
 返回Json示例：
 
-```
 {
   "msg": "success",
   "result": [
@@ -242,15 +248,14 @@ key | string| 是| 用户申请的appkey
     }
   ]
 }
-```
 数据源已经有了，下面整理了需要用到的知识点。
-1. 网络请求-HttpURLConnection
-2. 数据存储-SharedPreference,GreenDao
-3. 后台更新-Service
-4. 多媒体播放-MediaPlayer
-5. UI-SurfaceView,三级联动布局
 
-> 以上知识点如果大家还不熟悉的话，可以跳到前面的章节。
+网络请求-HttpURLConnection
+数据存储-SharedPreference,GreenDao
+后台更新-Service
+多媒体播放-MediaPlayer
+UI-SurfaceView,三级联动布局
+以上知识点如果大家还不熟悉的话，可以跳到前面的章节。
 从本节开始，我们就要真正地动手编码了。
 ### AndroidStudio项目搭建
 #### 1. 项目结构树
@@ -271,13 +276,13 @@ key | string| 是| 用户申请的appkey
 
 ```
 buildscript {
-    ext.kotlin_version = '1.1.4-3'
+    ext.kotlin_version = '1.1.51'
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0-beta7'
+        classpath 'com.android.tools.build:gradle:3.0.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2'
     }
@@ -309,7 +314,7 @@ android {
     buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.apkbus.weather"
-        minSdkVersion 21
+        minSdkVersion 19
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -676,7 +681,43 @@ class ApiHelper {
 
 最后的`getWeatherDetail(activity: Activity?, province: String?, city: String?, callBack: ApiCallBack?)`方法就是后面要用到的获取天气详情的接口。
 
-### 2. 工具类封装
+### 2. 数据解析
+现有与服务器传输的数据格式一般有`xml`，`json`两种。因为`xml`的读取速度缓慢且比较耗内存，特别是涉及到大量数据时。目前大部分应用都采用json的格式来传输数据。
+
+`json`解析可以采用Android自带`org`包下面的`JsonObject`解析。或者使用Google提供的`Gson`来解析。下面举例说明两种方式的用法：
+
+
+```
+    //解析message字段
+        //1.采用JsonObject解析
+        var jsonStr = "{\"message\":\"this is a message\"}"
+        try {
+            var jsonObject = JSONObject(jsonStr)
+            var message = jsonObject.getString("message")
+        } catch (e : JSONException) {
+            e.printStackTrace()
+        }
+        
+        
+        //2.采用Gson解析，需要先声明一个与Json字符串对应的实体类，通过反射的机制解析为对象，通过句柄获取对应的字段值。
+        //声明实体类
+     class Result {
+        var message : String?= null
+        }
+        //解析过程
+        var result = Gson().fromJson(jsonStr, Result::class.java)
+        if (result != null) {
+            var message = result.message
+        }
+    
+```
+从上面简单的例子可以看出，JsonObject的优势是不用把所有的字段都解析出来可以直接解析需要的字段，不需要建立多余的Model。但是如果结构比较复杂就会写非常多的代码，且不好维护。Gson的优点是代码量少，效率非常高且有现成的插件可以一键生成Model。
+
+> 可以在Android Studio中plugin搜索JsonFormat插件，安装重启后可以使用快捷键`alt`+`s`（windows）， `command`+`s`(mac os)命令呼出操作界面，将对应的Json字符串放进去就可以自动生成Json model。
+
+下面介绍本项目中Gson的用法。
+
+### 3. 工具类封装
 工具类的包结构树如下：
 
 ![image.png](http://upload-images.jianshu.io/upload_images/4469838-aa239975caf2a454.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
@@ -855,6 +896,7 @@ fun showToast(context: BaseActivity?, msg:String){
 }
 ```
 - SharedPreferenceUtils:用于统一管理应用中用到的`SharedPreference`，后面用到时会接着介绍。
+
 前面几节框架搭建完后，从本节开始就要着手画界面啦。没错要开始使用Android 的核心组件`Activity`。
 
 开始写本节的视频启动页之前，需要先写`BaseActivity`去配置应用所有`Activity`的通用属性,方法等。后面的所有的`Activity`都必须继承`BaseActivity`。
@@ -963,34 +1005,39 @@ class SplashActivity : BaseActivity(), SurfaceHolder.Callback {
             </intent-filter>
 </activity>
 ```
+
 ### 12.5.1 设计概述
 #### 1）结构设计概述：
 本APP旨在教学，设计初衷是方便学习分享，故UI部分仅设计了：
 
-①两个交互活动（Activity），涉及了Activity的生命周期、信息传递、相互跳转等知识点；
+①两个交互活动（Activity），涉及了Activity的生命周期、信息传递、跳转等知识点；
 
-②一个碎片控件（Fragment），涉及了Fragment的生命周期、调用接口为控件赋值等知识点；
+②一个碎片控件（Fragment），涉及了Fragment的生命周期、调用接口取值赋值等知识点；
 
-UI中用到了如TextView、Button等原生控件，support-v7中包含的RecyclerView，以及一款由Git开源开发者提供的“转轮控件”——WheelView。
+UI中用到了如TextView、Button、RecyclerView和WheelView。前二者是Android原生的，RecyclerView则是官方在Support-v7支持库中补充的，最后者是我们遴选第三方库选用的一款轻量控件，适于研究学习。
 
-为RecyclerView赋值，我们用到了BaseQuickAdapter，这是一款用于为自定义循环布局赋值的简洁而高效的适配器，我们将在项目中简单介绍其使用方法。
+为RecyclerView赋值，我们用到了BaseQuickAdapter，这是一款为自定义循环布局赋值的简洁而高效的适配器，我们将在项目中简单介绍其使用方法。
 #### 2）界面设计介绍：
 开屏动画结束后主线程来到了MainActivity，如下两张图是其布局图和效果图：
 
 ![image.png](http://upload-images.jianshu.io/upload_images/4990900-2c486e653cf94ee2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-![image.png](http://upload-images.jianshu.io/upload_images/4990900-e267a6db54b5c501.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image.png](http://upload-images.jianshu.io/upload_images/4990900-6ab1cab2a72538d9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 （布局详见activity_main.xml）
 
 MainActivity绑定的布局中只包含了名为“container”的全屏线性父布局（布局图中白色部分），更改背景图、加载显示天气的碎片布局均是在“container”上实现的。
 
 CityWeatherFragment继承了父布局的全部显示区，并囊括了所有最上层子控件，其布局如下：
 
-![image.png](http://upload-images.jianshu.io/upload_images/4990900-39a54f625f6842b9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)（布局详见fragment_city_weather.xml）
+![image.png](http://upload-images.jianshu.io/upload_images/4990900-3b166fa8c450231b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+（布局详见fragment_city_weather.xml）
 
 点击用于显示地区的TextView控件会跳转到用于选择地址的活动（ChooseLocationActivity），其布局图和效果图如下：
 
-![image.png](http://upload-images.jianshu.io/upload_images/4990900-3a916e5eb7c0fc35.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-![image.png](http://upload-images.jianshu.io/upload_images/4990900-93d6ab0600c0a5b7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)（布局详见activity_choose_location.xml）
+![image.png](http://upload-images.jianshu.io/upload_images/4990900-feb2488ac05110ea.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image.png](http://upload-images.jianshu.io/upload_images/4990900-4c5ae9319ed08e63.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+（布局详见activity_choose_location.xml）
 
 该activity使用本例中的核心控件——WheelView实现了省-市-县区三级联动地址选择，并在选择结束后跳转回MainActivity时将选择的地址组合同时返回。
 ### 12.5.2 实现过程
@@ -1003,14 +1050,26 @@ CityWeatherFragment继承了父布局的全部显示区，并囊括了所有最�
 ④实现CityWeatherFragment类中的事物逻辑，添加对地址选择页面的跳转方法
 
 ⑤建立ChooseLocationActivity.kt，并绑定布局activity_choose_location.xml
-### 12.5.3 注意事项
-①新建的Activity类要在AndroidManifast.xml文件中进行注册
 
-②Recyclerview要想显示内容还要在添加LayoutManager
+以往大多文字教程都冗杂且枯燥，故笔者在此不再卖弄笔墨絮叨太多，具体代码释义见码中注释，就是这样，喵。
+### 12.5.3 细节处理
+①文案细节：未来数日天气预报显示文案以拉取到的条数为准；地区选择结果判断是否为三级地址后再行显示；对每一条要显示的数据都做判空显示默认文案处理，若全为空则显示样式如下：
 
-③调用接口保证数据实体类内的元素名称要和接口内包含完全一致，且只多不少否则不会获取成功
+![image.png](http://upload-images.jianshu.io/upload_images/4990900-664b0bd5960b43cb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+这样即使哪一个环节出现差错传丢了地址值，也会避免因为产生Kotlin的NullPointerException而导致程序闪退（不要以为Kotlin加入了空安全就不会空闪，图样图森破T_T）。
+
+②设计细节：Activity基类增加了一层第三方SwipeBackActivity类继承，它实现了滑动退出功能，使得所有继承了本例基类Activity的类都多了一层可滑退操作，可左右下滑动退出也可控制关闭（因为第三方类内容不是很多，所以直接粘到了library目录下，相应的资源文件也一并粘贴到了res文件夹下的相对位置）。
+### 12.5.4 注意事项
+①新建Android组件实现要在AndroidManifast.xml文件中先行注册才能使用，不然会闪，如Activity、Service；
+
+②RecyclerView要想显示内容还要在添加LayoutManager，有时候辛辛苦苦地写好了适配器类却忘记指给RecyclerView，这些都是非常2的问题；
+
+③接口返回字符串转换自定义数据类时保证字段名称、元素结构要完全一致，至少是只多不少，否则不会什么也抓不到；
 
 ④用系统FragmentManager将建立的CityWeatherFragment对象添加到界面上的过程中要注意对于上传结果的上传（commot()方法）。
+
+
 如何实现后台自动刷新数据呢？
 
 首先分析一下，既然是后台刷新那就需要用到Android的`Service`组件，自动刷新则需要定时器`AlermManager`来指定时间去启动`service`任务。自动获取的数据如何保存呢？这里我们使用`SharedPreference`来存储返回数据。
@@ -1115,12 +1174,13 @@ override fun onCreate(savedInstanceState: Bundle?) {
         UpdateService.startUpdateService(mActivity)
     }
 ```
-### 12.7.1 项目小结
-本项目旨在用Kotlin语言为Android初学者展开一次完整的APP入门教学体验，在本例中我们结合了Activity生命周期和信息传递、数据库、网络连接、调用接口及定义数据结构、UI界面设计、Service后台服务、SharePreferences、第三方开源代码引用等多方面内容，尽量使得APP在满足简洁设计的同时能囊括更多的知识点。
 
-但由于开发者能力有限，所带来的知识想必难以面面俱到，敬请各位的谅解和支持。
+### 12.7.1 项目小结
+本项目旨在用Kotlin语言为Android学习者提供一次完整的APP开发实践，在本例中我们结合了Activity的生命周期、信息传递、数据库、网络连接、调用接口、自定义数据结构、UI设计、Service后台服务、SharePreferences应用共享参数、引入第三方开源库等多方面知识，尽量使得APP在满足简洁设计的同时能包含多元的知识点。
+
+但由于开发者能力有限，所带来的知识想必难以面面俱到，敬请各位谅解与支持。
 ### 12.7.2 可扩展性说明
-虽然“巴士天气”的设计达到了预期的教学目的，但作为一款产品还远远不够“优秀”，单从以下方面，便还大有可为：
+虽然“巴士天气”的实现达到了预期的教学目的，但作为一款产品还远不够优秀，在此提供以下优化思路，供使用者进阶学习：
 
 ①开屏动画可设计成只显示一次，或每日首次打开APP时显示；
 
@@ -1128,30 +1188,11 @@ override fun onCreate(savedInstanceState: Bundle?) {
 
 ③主页面可同时包含多个地区的天气，并实现添加、删除等功能（详见小米天气）；
 
-④将界面设计成你喜欢的样子。
+④优化转轮View，将之设计成循环显示样式；
 
-好啦，学会如何制作一款简单的APP之后，要如何将其打包并上传到安卓应用市场呢？请继续阅读13章节的内容。
+⑤将界面设计成你喜欢的样子。
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+大功告成，学会如何制作一款简单的APP之后，又要如何将其打包并上传到安卓应用市场呢？请阅读后续章节的内容。
 
 
 
